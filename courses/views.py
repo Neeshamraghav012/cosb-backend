@@ -14,7 +14,7 @@ from rest_framework.parsers import JSONParser
 @api_view(['GET'])
 def CourseListView(request):
    
-   snippet = Course.objects.all()
+   snippet = Course.objects.all()[:50]
    if request.method == 'GET':
       serializer = CourseSerializer(snippet, many = True)
       return JsonResponse(serializer.data, safe=False)
