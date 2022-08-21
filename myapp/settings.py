@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-1c-j77cta4mt=r4h^=6%j&nd7x*y$%^4na%w*g=q^2esm!y3s!'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -101,6 +101,7 @@ CORS_ALLOWED_ORIGINS = [
 
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://cosb.live",
 ]
 
 CORS_ALLOW_METHODS = [
