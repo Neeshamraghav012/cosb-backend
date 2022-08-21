@@ -14,7 +14,7 @@ from rest_framework.parsers import JSONParser
 @api_view(['GET'])
 def CourseListView(request):
    
-   snippet = Course.objects.all()[:20]
+   snippet = Course.objects.all()[:10]
    if request.method == 'GET':
       serializer = CourseSerializer(snippet, many = True)
       return JsonResponse(serializer.data, safe=False)
@@ -38,7 +38,7 @@ def CourseSearchView(request, tag):
    
    tag = tag.lower().split(' ')
    print(tag)
-   snippet = Course.objects.filter(tags__name__in = tag)
+   snippet = Course.objects.filter(tags__name__in = tag)[:5]
 
    if request.method == 'GET':
       serializer = CourseSerializer(snippet, many = True)
