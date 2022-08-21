@@ -20,6 +20,14 @@ def CourseListView(request):
       return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
+def AllCourseView(request):
+   
+   snippet = Course.objects.all()
+   if request.method == 'GET':
+      serializer = CourseSerializer(snippet, many = True)
+      return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
 def CourseDetailView(request, id):
 
     if request.method == 'GET':
