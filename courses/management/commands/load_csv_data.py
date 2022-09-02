@@ -1,6 +1,6 @@
 from csv import DictReader
 from django.core.management import BaseCommand
-
+import random
 
 from courses.models import Course
 
@@ -29,9 +29,10 @@ class Command(BaseCommand):
 
 
         #Code to load the data into database
-        for row in DictReader(open('./coursea_data.csv')):
+        for row in DictReader(open('./Udemy_Courses.csv')):
 
-            link = f"https://www.coursera.org/search?query={str(row['name'])}"
+
+            link = f"https://www.udemy.com{row['link']}"
             tags = row['name'].lower().split(' ')
 
             filtered_tag = []
@@ -40,7 +41,7 @@ class Command(BaseCommand):
                 if i.isalpha():
                     filtered_tag.append(i)
 
-            course = Course(name = row['name'], university = row['university'], overall_rating = row['overall_rating'], enrolls = row['enrolls'], platform = "Coursera", author = row["university"], link = link)
+            course = Course(name = row['name'], overall_rating = random.randint(0, 5), enrolls = random.randint(10000, 1000000), platform = row['platform'], author = row["author"], link = link, price = 500, image = row['image'], image_mobile = row['image_mobile'], description = row['description'])
             course.save()
             course.tags.add(*filtered_tag)  
             course.save()
