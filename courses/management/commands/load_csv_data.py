@@ -18,11 +18,14 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
     
+        """
         # Show this if the data already exist in the database
         if Course.objects.exists():
             print('child data already loaded...exiting.')
             print(ALREDY_LOADED_ERROR_MESSAGE)
             return
+
+        """
             
         # Show this before loading the data into the database
         print("Loading childrens data")

@@ -13,3 +13,7 @@ urlpatterns = [
     path('', views.getRoutes),
     path('test/', views.testEndPoint, name='test'),
 ]
+
+# https://cosbapi.herokuapp.com/api/user/token/ for login
+# https://cosbapi.herokuapp.com/api/user/token/refresh/ for refresh token
+# https://cosbapi.herokuapp.com/api/user/register/      for sign up
