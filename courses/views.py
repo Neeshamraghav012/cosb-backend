@@ -72,3 +72,13 @@ def RateView(request):
    rating.save()
    rating.update_rating()
    return JsonResponse({"status": 1})
+
+
+@api_view(['POST'])
+def TestToken(request):
+
+   reqBody = json.loads(request.body)
+   json_token = reqBody['token']
+   data = jwt.decode(json_token, SECRET_KEY, algorithms=['HS256'])
+
+   return JsonResponse(data)
