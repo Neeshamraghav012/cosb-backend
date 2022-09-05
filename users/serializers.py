@@ -3,6 +3,8 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
+from django.http import HttpResponse, JsonResponse
+from rest_framework import status
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -16,7 +18,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # ...
         return token
 
+
+def passwordLength(value):
+    if len(value) < 6:
+        raise serializers.ValidationError('Password length must be atleast 6 characters.')
+
 class RegisterSerializer(serializers.ModelSerializer):
+
+    password = serializers.CharField(max_length = 255, validators = [passwordLength])
 
 
     class Meta:
@@ -25,8 +34,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
+
         user = User.objects.create(
-            username=validated_data['username']
+            username=validated_data['username'], email = validated_data['email']
         )
 
         user.set_password(validated_data['password'])

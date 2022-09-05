@@ -22,6 +22,7 @@ class Course(models.Model):
 	image = models.URLField(max_length = 500, null = True, blank = True)
 	link = models.URLField(max_length = 2000)
 	overall_rating = models.FloatField(default = 0)
+	total_ratings = models.IntegerField(default = 0)
 	price = models.IntegerField(default = 0)
 	catagory = models.CharField(max_length = 250, default="Computer Science")
 	platform = models.CharField(max_length = 1000, default="YouTube")
@@ -47,13 +48,12 @@ class Course(models.Model):
 		ordering = ["-overall_rating"]
 
 
-"""
 class Ratings(models.Model):
 
-	user = models.ManyToManyField(User)
+	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	course = models.ForeignKey(Course, on_delete = models.CASCADE)
 	review = models.TextField()
-	rating = models.FloatField()
+	rating = models.FloatField(default = 0)
 
 
 	def __str__(self):
@@ -61,11 +61,10 @@ class Ratings(models.Model):
 
 
 	# make a function to add this user rating to the course
-
 	def update_rating(self):
 		course = Course.objects.get(id = self.course.id)
 		ratings = Ratings.objects.filter(course = course)
-		course.overall_rating = ratings.rating / len(ratings)
-		ratings.save()
 
-"""
+		course.total_ratings += self.rating
+		course.overall_rating = (course.total_ratings / len(ratings))
+		course.save()

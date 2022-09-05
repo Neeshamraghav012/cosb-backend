@@ -8,6 +8,12 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from .models import CourseStatus
+from rest_framework import permissions
+import json
+import jwt
+from myapp.settings import SECRET_KEY
+from courses.models import Course
 
 # Create your views here.
 
@@ -42,3 +48,18 @@ def testEndPoint(request):
         data = f'Congratulation your API just responded to POST request with text: {text}'
         return Response({'response': data}, status=status.HTTP_200_OK)
     return Response({}, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def StatusView(request):
+
+    reqBody = json.loads(request.body)
+    json_token = reqBody['token']
+    data = jwt.decode(json_token, SECRET_KEY, algorithms=['HS256'])
+    user = User.objects.get(username = data['username'])
+    course = Course.objects.get(id = reqBody['id'])
+
+    status = CourseStatus(user = user, course = course, status = reqBody['status'])
+    status.save()
+    return JsonResponse({"status": 1})
