@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import CourseListView, CourseDetailView, CourseSearchView, AllCourseView, RateView, TestToken
+from .views import CourseListView, CourseDetailView, CourseSearchView, AllCourseView, RateView, TestToken, Reviews
 
 
 urlpatterns = [
@@ -11,6 +11,8 @@ urlpatterns = [
     path('all-courses-view/', AllCourseView, name = "all-courses-view"),
     path('rate-course/', RateView, name = 'rate-course'),
     path('test-token/', TestToken, name = 'test-token'),
+    path('reviews/', Reviews, name = 'reviews'),
+
 
 
 ]

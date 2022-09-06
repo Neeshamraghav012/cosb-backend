@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializers import CourseSerializer
+from .serializers import CourseSerializer, ReviewSerializer
 from django.http import HttpResponse, JsonResponse
 from .models import Course, Ratings
 from rest_framework import viewsets
@@ -18,8 +18,12 @@ from rest_framework import permissions
 # Customizable Function based view.
 @api_view(['GET'])
 def CourseListView(request):
+
+
+   reqBody = json.loads(request.body)
+   count = int(reqBody["count"])
    
-   snippet = Course.objects.all()[:5]
+   snippet = Course.objects.all()[count:(count + 5)]
    if request.method == 'GET':
       serializer = CourseSerializer(snippet, many = True)
       return JsonResponse(serializer.data, safe=False)
@@ -68,6 +72,14 @@ def RateView(request):
 
    user = User.objects.get(username = data['username'])
    course = Course.objects.get(id = reqBody['id'])
+
+   check = Ratings.objects.filter(user = user)
+
+   if check:
+      for i in check:
+         i.delete()
+
+
    rating = Ratings(user = user, course = course, rating = float(reqBody['rating']), review = reqBody['review'])
    rating.save()
    rating.update_rating()
@@ -87,5 +99,27 @@ def TestToken(request):
 
    except:
 
+      return JsonResponse({"status": 0})
+
+
+
+
+
+@api_view(['GET'])
+def Reviews(request):
+
+   reqBody = json.loads(request.body)
+   course_id = reqBody["id"]
+
+   try:
+
+      course = Course.objects.get(id = course_id)
+      reviews = Ratings.objects.filter(course = course)
+      serializer = ReviewSerializer(reviews, many = True)
+      return JsonResponse(serializer.data, safe=False)
+
+   except Exception as e:
+
+      print(e)
       return JsonResponse({"status": 0})
 

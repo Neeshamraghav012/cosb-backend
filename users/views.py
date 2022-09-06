@@ -84,6 +84,14 @@ def StatusView(request):
     user = User.objects.get(username = data['username'])
     course = Course.objects.get(id = reqBody['id'])
 
+
+    check = CourseStatus.objects.filter(user = user)
+
+    if check:
+        for i in check:
+            i.delete()
+
+
     status = CourseStatus(user = user, course = course, status = reqBody['status'])
     status.save()
     return JsonResponse({"status": 1})
