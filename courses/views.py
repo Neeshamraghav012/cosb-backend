@@ -23,10 +23,13 @@ def CourseListView(request):
    reqBody = json.loads(request.body)
    count = int(reqBody["count"])
    
+   if (count + 5) > len(Course.objects.all()):
+      return JsonResponse({"status": 0})
+
    snippet = Course.objects.all()[count:(count + 5)]
-   if request.method == 'GET':
-      serializer = CourseSerializer(snippet, many = True)
-      return JsonResponse(serializer.data, safe=False)
+   serializer = CourseSerializer(snippet, many = True)
+   return JsonResponse(serializer.data, safe=False)
+
 
 @api_view(['GET'])
 def AllCourseView(request):
