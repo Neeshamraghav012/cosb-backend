@@ -14,16 +14,40 @@ import json
 import jwt
 from myapp.settings import SECRET_KEY
 from courses.models import Course
+from rest_framework.parsers import JSONParser
+from rest_framework.views import APIView
 
 # Create your views here.
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
+
+class RegisterView(APIView):
+
+
+    def post(self, request, format='json'):
+        
+        print(request.data)
+        serializer = RegisterSerializer(data=request.data)
+
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({"status": 1})
+
+        return JsonResponse(serializer.errors, status = 400)
+
+
+
+
+"""
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
+
+"""
 
 
 @api_view(['GET'])

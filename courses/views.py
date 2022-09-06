@@ -79,6 +79,13 @@ def TestToken(request):
 
    reqBody = json.loads(request.body)
    json_token = reqBody['token']
-   data = jwt.decode(json_token, SECRET_KEY, algorithms=['HS256'])
 
-   return JsonResponse(data)
+   try:
+      data = jwt.decode(json_token, SECRET_KEY, algorithms=['HS256'])
+      return JsonResponse(data)
+
+
+   except:
+
+      return JsonResponse({"status": 0})
+
