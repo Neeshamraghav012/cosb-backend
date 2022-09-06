@@ -16,7 +16,7 @@ from myapp.settings import SECRET_KEY
 from rest_framework import permissions
 
 # Customizable Function based view.
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def CourseListView(request):
 
 
@@ -105,7 +105,7 @@ def TestToken(request):
 
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def Reviews(request):
 
    reqBody = json.loads(request.body)
