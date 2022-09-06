@@ -29,7 +29,7 @@ def CourseListView(request):
    if (count + 5) > len(Course.objects.all()):
       return JsonResponse({"status": 0})
 
-   snippet = Course.objects.all()[count:(count + 5)]
+   snippet = list(Course.objects.values())[count:(count + 5)]
    serializer = CourseSerializer(snippet, many = True)
    return JsonResponse(serializer.data, safe=False)
 
