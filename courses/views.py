@@ -22,6 +22,9 @@ def CourseListView(request):
 
    reqBody = json.loads(request.body)
    count = int(reqBody["count"])
+
+   if not count:
+      count = 0
    
    if (count + 5) > len(Course.objects.all()):
       return JsonResponse({"status": 0})
