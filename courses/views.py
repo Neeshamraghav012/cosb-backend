@@ -79,7 +79,7 @@ def RateView(request):
    user = User.objects.get(username = data['username'])
    course = Course.objects.get(id = reqBody['id'])
 
-   check = Ratings.objects.filter(user = user)
+   check = Ratings.objects.filter(user = user, course = course)
 
    if check:
       for i in check:
