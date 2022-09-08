@@ -15,6 +15,8 @@ urlpatterns = [
     path('course-status/', views.StatusView, name = 'course-status'),
     path('cosb-id/', views.cosbid, name = 'cosb-id'),
     path('profile-view/', views.profileView, name = 'profile-view'),
+    path('profile-view/<str:username>/', views.profileViewByName, name = 'profile-view-by-name'),
+
 
 
 ]

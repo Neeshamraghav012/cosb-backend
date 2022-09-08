@@ -104,7 +104,7 @@ def cosbid(request):
 
     username = reqBody['username']
 
-    users = User.objects.filter(username__startswith = username)
+    users = User.objects.filter(username__istartswith = username)
 
     serializer = UserSerializer(users, many = True)
 
@@ -130,3 +130,24 @@ def profileView(request):
 
         print(e)
         return JsonResponse({"status": 0})
+
+
+
+
+@api_view(['GET'])
+def profileViewByName(request, username):
+
+
+    try:
+
+        user = User.objects.get(username = username)
+        courses = CourseStatus.objects.filter(user = user)
+        serializer = CourseStatusSerializer(courses, many = True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+    except Exception as e:
+
+        print(e)
+        return JsonResponse({"status": 0})
+
