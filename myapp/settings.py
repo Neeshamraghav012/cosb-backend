@@ -77,6 +77,7 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True
 
 
 
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',

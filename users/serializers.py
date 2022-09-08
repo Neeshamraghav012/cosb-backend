@@ -6,6 +6,7 @@ from rest_framework.validators import UniqueValidator
 from django.http import HttpResponse, JsonResponse
 from rest_framework import status
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import CourseStatus
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -50,3 +51,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'email')
+
+
+class CourseStatusSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = CourseStatus
+        fields = "__all__"
+        depth = 1
