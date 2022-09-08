@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
 from django.http import JsonResponse
-from users.serializers import MyTokenObtainPairSerializer, RegisterSerializer
+from users.serializers import MyTokenObtainPairSerializer, RegisterSerializer, UserSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics
 from django.contrib.auth.models import User
@@ -95,3 +95,17 @@ def StatusView(request):
     status = CourseStatus(user = user, course = course, status = reqBody['status'])
     status.save()
     return JsonResponse({"status": 1})
+
+
+@api_view(['GET'])
+def cosbid(request):
+
+    reqBody = json.loads(request.body)
+
+    username = reqBody['username']
+
+    users = User.objects.filter(username__startswith = username)
+
+    serializer = UserSerializer(users, many = True)
+    
+    return JsonResponse(serializer.data, safe=False)

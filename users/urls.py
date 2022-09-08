@@ -13,6 +13,8 @@ urlpatterns = [
     path('', views.getRoutes),
     path('test/', views.testEndPoint, name='test'),
     path('course-status/', views.StatusView, name = 'course-status'),
+    path('cosb-id/', views.cosbid, name = 'cosb-id'),
+
 ]
 
 # https://cosbapi.herokuapp.com/api/user/token/ for login
