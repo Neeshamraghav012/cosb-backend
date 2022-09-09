@@ -13,6 +13,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
 
     "corsheaders",
+    'whitenoise.runserver_nostatic',
     'taggit',
     'users',
     'courses',
@@ -32,6 +33,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -76,6 +78,7 @@ DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
+WHITENOISE_USE_FINDERS = True
 
 
 REST_FRAMEWORK = {
@@ -178,3 +181,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_FILES_DIR = [os.path.join(BASE_DIR, 'staticfiles')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

@@ -12,3 +12,4 @@ sqlparse==0.4.2
 tzdata==2022.1
 djangorestframework-simplejwt==5.2.0
 PyJWT==2.4.0
+whitenoise
