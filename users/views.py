@@ -97,7 +97,7 @@ def StatusView(request):
     return JsonResponse({"status": 1})
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def cosbid(request):
 
     reqBody = json.loads(request.body)
@@ -112,7 +112,7 @@ def cosbid(request):
 
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def profileView(request):
 
     reqBody = json.loads(request.body)
