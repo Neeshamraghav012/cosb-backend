@@ -85,7 +85,7 @@ def StatusView(request):
     course = Course.objects.get(id = reqBody['id'])
 
 
-    check = CourseStatus.objects.filter(user = user)
+    check = CourseStatus.objects.filter(user = user, course = course)
 
     if check:
         for i in check:
@@ -122,8 +122,10 @@ def profileView(request):
 
         user = User.objects.get(username = username)
         courses = CourseStatus.objects.filter(user = user)
-        serializer = CourseStatusSerializer(courses, many = True)
+
+        serializer = CourseStatusSerializer(courses, many=True)
         return JsonResponse(serializer.data, safe=False)
+
 
 
     except Exception as e:
