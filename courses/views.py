@@ -60,11 +60,32 @@ def CourseDetailView(request, id):
 def CourseSearchView(request, tag):
    
    tag = tag.lower().split(' ')
-   print(tag)
    snippet = Course.objects.filter(tags__name__in = tag)[:5]
 
    if request.method == 'GET':
       serializer = CourseSerializer(snippet, many = True)
+      return JsonResponse(serializer.data, safe=False)
+
+
+@api_view(['GET', 'POST'])
+def CourseInfiniteSearchView(request, tag):
+   
+   tag = tag.lower().split(' ')
+
+   reqBody = json.loads(request.body)
+   count = int(reqBody["count"])
+
+   if not count:
+      count = 0
+
+   snippet = Course.objects.filter(tags__name__in = tag)
+
+   
+   if (count + 5) > len(snippet):
+      return JsonResponse({"status": 0})
+
+   if request.method == 'GET':
+      serializer = CourseSerializer(snippet[count:(count + 5)], many = True)
       return JsonResponse(serializer.data, safe=False)
 
 

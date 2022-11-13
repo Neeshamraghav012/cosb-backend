@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import CourseListView, CourseDetailView, CourseSearchView, AllCourseView, RateView, TestToken, Reviews
+from .views import CourseListView, CourseDetailView, CourseSearchView, AllCourseView, RateView, TestToken, Reviews, CourseInfiniteSearchView
 
 
 urlpatterns = [
@@ -12,7 +12,7 @@ urlpatterns = [
     path('rate-course/', RateView, name = 'rate-course'),
     path('test-token/', TestToken, name = 'test-token'),
     path('reviews/', Reviews, name = 'reviews'),
-
+    path('courses-search/<str:tag>/', CourseInfiniteSearchView, name = "courses-infinite-search-view"),
 
 
 ]
