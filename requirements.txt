@@ -7,7 +7,6 @@ djangorestframework==3.13.1
 django-summernote==0.8.20.0
 drf-jwt==1.19.2
 gunicorn
-mysqlclient==2.1.1
 Pillow==9.2.0
 psycopg2==2.9.3
 pytz==2022.1
