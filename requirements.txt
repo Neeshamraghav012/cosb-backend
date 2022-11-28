@@ -8,7 +8,6 @@ django-summernote==0.8.20.0
 drf-jwt==1.19.2
 gunicorn
 Pillow==9.2.0
-psycopg2==2.9.3
 pytz==2022.1
 sqlparse==0.4.2
 tzdata==2022.1
