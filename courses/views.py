@@ -20,6 +20,8 @@ from rest_framework import permissions
 def CourseListView(request):
 
 
+   print(request.COOKIES.get('token', 'Nothing in cookie'))
+
    reqBody = json.loads(request.body)
    count = int(reqBody["count"])
 
@@ -127,7 +129,6 @@ def TestToken(request):
    except:
 
       return JsonResponse({"status": 0})
-
 
 
 

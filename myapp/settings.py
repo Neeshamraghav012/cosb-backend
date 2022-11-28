@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 from datetime import timedelta
 SECRET_KEY = 'django-insecure-1c-j77cta4mt=r4h^=6%j&nd7x*y$%^4na%w*g=q^2esm!y3s!'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'taggit',
     'users',
     'courses',
+    'roadmaps',
+    'django_summernote',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,11 +66,15 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-"""
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'xsfKl9V8Pl',
+        'USER':'xsfKl9V8Pl',
+        'PASSWORD':'t1ZiEInY7Y',
+        'HOST':'remotemysql.com',
+        'PORT':'3306',
     }
 }
 
@@ -76,9 +82,10 @@ DATABASES = {
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
-
 WHITENOISE_USE_FINDERS = True
+
+"""
+
 
 
 REST_FRAMEWORK = {

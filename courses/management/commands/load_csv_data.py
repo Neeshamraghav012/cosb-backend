@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
 
         #Code to load the data into database
-        for row in DictReader(open('./Udemy_Courses.csv')):
+        for row in DictReader(open('./dataclips.csv')):
 
 
             link = f"https://www.udemy.com{row['link']}"
