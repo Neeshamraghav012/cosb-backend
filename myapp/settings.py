@@ -82,10 +82,10 @@ DATABASES = {
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-WHITENOISE_USE_FINDERS = True
+
 
 """
-
+WHITENOISE_USE_FINDERS = True
 
 
 REST_FRAMEWORK = {
@@ -182,10 +182,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATIC_FILES_DIR = [os.path.join(BASE_DIR, 'staticfiles')]
+STATICFILES_DIRS = [BASE_DIR/'static',]
+STATIC_ROOT = BASE_DIR/'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
