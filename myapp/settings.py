@@ -66,10 +66,10 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
+"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'xsfKl9V8Pl',
         'USER':'xsfKl9V8Pl',
         'PASSWORD':'t1ZiEInY7Y',
@@ -82,9 +82,6 @@ DATABASES = {
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
-
-"""
 WHITENOISE_USE_FINDERS = True
 
 
@@ -182,11 +179,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-
+"""
 STATICFILES_DIRS = [BASE_DIR/'static',]
 STATIC_ROOT = BASE_DIR/'staticfiles'
+"""
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_FILES_DIR = [os.path.join(BASE_DIR, 'staticfiles')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+#mysqlclient==2.1.1
