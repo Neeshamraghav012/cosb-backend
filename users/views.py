@@ -205,7 +205,7 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
         code = validated_data.get('code')
         error = validated_data.get('error')
 
-        login_url = f'http://localhost:3000/login'
+        login_url = f'https://cosb.online/login'
 
         if error or not code:
             params = urlencode({'error': error})
@@ -237,7 +237,7 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
         json_data = {"email": profile_data['email']}
 
         token = jwt.encode(payload=json_data, key=SECRET_KEY, algorithm="HS256")
-        response = redirect(f"http://localhost:3000?token={token}&username={profile_data['username']}")
+        response = redirect(f"https://cosb.online?token={token}&username={profile_data['username']}")
         response = jwt_login(response=response, user=user)
 
         # response.set_cookie('token', jwt.encode(payload=json_data, key=SECRET_KEY, algorithm="HS256"))
