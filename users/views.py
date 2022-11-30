@@ -214,7 +214,7 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
         #domain = 'http://127.0.0.1:8000/api/v1/auth/login/google/'
         #api_uri = reverse('api:v1:auth:login-with-google')
 
-        redirect_uri = 'http://127.0.0.1:8000/api/v1/auth/login/google/'
+        redirect_uri = 'https://cosbapi.herokuapp.com/api/v1/auth/login/google/'
 
         access_token = google_get_access_token(code=code, redirect_uri=redirect_uri)
 
